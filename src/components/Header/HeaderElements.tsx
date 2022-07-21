@@ -21,8 +21,26 @@ export const HeaderElements = styled.div`
 `;
 export const LogoContainer = styled.div`
   font-size: 16px;
+  width: 280px;
+  height: 100%;
+  display: flex;
+  align-items: center;
 `;
-export const NavigationContainer = styled.div``;
+export const LogoIcon = styled.img`
+  width: 100px;
+`;
+export const NavigationContainer = styled.div`
+  width: 280px;
+  padding-left: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+export const SingleIcon = styled.img`
+  width: 21px;
+  height: 21px;
+`;
+
 export const Searchbar = styled.input`
   background: var(--additional-color);
   box-shadow: none;

@@ -5,12 +5,17 @@ const GlobalStyles = createGlobalStyle`
  --primary-background:#fcfcfc;
  --header-background:#ffffff;
  --shadows-color:#d9d9d9;
- --additional-color:#c6c6c6;
+ --comments-color:#8E9E9E;
+ --additional-color:#e9e9e9;
+ --font-color:#262626;
+ --bold-weight:600;
+ --regular-weight:400;
 }
 *{
  box-sizing:border-box;
  margin:0;
  padding:0;
+ font-family:'Inter', sans-serif;
 }
 body{
 

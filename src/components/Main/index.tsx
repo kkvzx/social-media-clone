@@ -1,6 +1,7 @@
 import React from "react";
 import GlobalStyles from "../GlobalStyles";
 import Header from "../Header";
+import Hero from "../Hero";
 import { MainWrapper } from "./MainElements";
 
 const Main = () => {
@@ -8,7 +9,7 @@ const Main = () => {
     <>
       <MainWrapper>
         <Header></Header>
-        <h1>Hello</h1>
+        <Hero></Hero>
       </MainWrapper>
       <GlobalStyles />
     </>
