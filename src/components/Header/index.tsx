@@ -1,4 +1,5 @@
 import React from "react";
+import { BtnIcon } from "../SinglePost/SinglePostElements";
 import {
   HeaderElements,
   HeaderWrapper,
@@ -24,12 +25,18 @@ const Header = () => {
         </LogoContainer>
         <Searchbar type="search" />
         <NavigationContainer>
-          <SingleIcon src={homeIcon} />
-          <SingleIcon src={sendIcon} />
-          <SingleIcon src={addPostIcon} />
-          <SingleIcon src={likeIcon} />
-          <SingleIcon src={homeIcon} />
-          <SingleIcon src={sendIcon} />
+          <BtnIcon>
+            <SingleIcon src={homeIcon} />
+          </BtnIcon>
+          <BtnIcon>
+            <SingleIcon src={sendIcon} />
+          </BtnIcon>
+          <BtnIcon>
+            <SingleIcon src={addPostIcon} />
+          </BtnIcon>
+          <BtnIcon>
+            <SingleIcon src={likeIcon} />
+          </BtnIcon>
         </NavigationContainer>
       </HeaderElements>
     </HeaderWrapper>

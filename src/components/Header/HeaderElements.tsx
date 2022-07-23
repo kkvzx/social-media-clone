@@ -49,4 +49,7 @@ export const Searchbar = styled.input`
   width: 25%;
   min-width: 180px;
   border-radius: 8px;
+  &:focus {
+    outline: 1px solid #a9a9a9;
+  }
 `;
