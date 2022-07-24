@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BtnIcon } from "../SinglePost/SinglePostElements";
 
 export const HeaderWrapper = styled.div`
   width: 100%;
@@ -26,6 +27,10 @@ export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
 `;
+export const LogoBtn = styled(BtnIcon)`
+  padding: 0;
+  margin: 0;
+`;
 export const LogoIcon = styled.img`
   width: 100px;
 `;
@@ -36,9 +41,33 @@ export const NavigationContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+export const NavigationContainerLog = styled(NavigationContainer)`
+  justify-content: center;
+`;
 export const SingleIcon = styled.img`
   width: 21px;
   height: 21px;
+`;
+export const Avatar = styled(SingleIcon)`
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  border: 1px solid black;
+`;
+export const LogBtn = styled.button`
+  width: 90px;
+  height: 30px;
+  padding: 5px 20px;
+  background: var(--secondary-color);
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 10px;
+  color: white;
+`;
+export const SignBtn = styled(LogBtn)`
+  background: none;
+  color: var(--secondary-color);
 `;
 
 export const Searchbar = styled.input`

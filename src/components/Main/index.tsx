@@ -5,6 +5,8 @@ import { MainWrapper } from "./MainElements";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Feed from "../../pages/Dashboard/Dashboard";
 import * as ROUTES from "../../constants/routes";
+import { useAuthListener } from "../../hooks/use-auth-listener";
+import UserContext from "../../context/user";
 
 const Login = lazy(() => import("../../pages/Login/login"));
 const SingUp = lazy(() => import("../../pages/SignUp/SingUp"));
@@ -13,8 +15,9 @@ const Profile = lazy(() => import("../../pages/Profile"));
 const NotFound = lazy(() => import("../../pages/NotFound/notFound"));
 
 const Main = () => {
+  const { user } = useAuthListener();
   return (
-    <>
+    <UserContext.Provider value={{ user }}>
       <Router>
         <Suspense fallback={<p>Loading...</p>}>
           <Routes>
@@ -27,7 +30,7 @@ const Main = () => {
         </Suspense>
       </Router>
       <GlobalStyles />
-    </>
+    </UserContext.Provider>
   );
 };
 
