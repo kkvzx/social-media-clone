@@ -22,6 +22,7 @@ body{
 
  background:var(--primary-background);
  color:black;
+ overflow-x:hidden;
 }
 `;
 

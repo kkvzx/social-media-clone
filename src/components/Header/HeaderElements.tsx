@@ -49,10 +49,9 @@ export const SingleIcon = styled.img`
   height: 21px;
 `;
 export const Avatar = styled(SingleIcon)`
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   border-radius: 100%;
-  border: 1px solid black;
 `;
 export const LogBtn = styled.button`
   width: 90px;
@@ -63,6 +62,7 @@ export const LogBtn = styled.button`
   font-weight: 700;
   cursor: pointer;
   margin: 10px;
+  border-radius: 4px;
   color: white;
 `;
 export const SignBtn = styled(LogBtn)`

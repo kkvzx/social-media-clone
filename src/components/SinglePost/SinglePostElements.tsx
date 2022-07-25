@@ -23,6 +23,7 @@ export const HeaderOfPost = styled.div`
 `;
 export const Author = styled.p`
   font-size: 14px;
+  align-self: end;
   color: var(--font-color);
   font-weight: var(--bold-weight);
   grid-column-start: 2;
