@@ -26,7 +26,6 @@ const sendIcon = require("../../img/Send.png");
 const addPostIcon = require("../../img/Add_post.png");
 const likeIcon = require("../../img/Like.png");
 const signOut = require("../../img/signout.png");
-const login = require("../../img/login.png");
 
 const Header = () => {
   const { firebase } = useContext(FirebaseContext);
