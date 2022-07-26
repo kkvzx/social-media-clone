@@ -28,7 +28,7 @@ export async function getUserByUserId(userId: string) {
 
   return user;
 }
-
+// takes users data from the firebase
 export async function getSuggestedProfiles(
   userId: string,
   following: string[]
@@ -41,4 +41,76 @@ export async function getSuggestedProfiles(
       (profile: any) =>
         profile.userId !== userId && !following.includes(profile.userId)
     );
+}
+
+export async function updateLoggedInUserFollowing(
+  loggedInUserDocId: string, //currently logged in user document id
+  profileId: string, //the user that I'm requesting to follow
+  isFollowingProfile: boolean //Am i currently following?
+) {
+  return firebase
+    .firestore()
+    .collection("users")
+    .doc(loggedInUserDocId)
+    .update({
+      following: isFollowingProfile
+        ? FieldValue.arrayRemove(profileId)
+        : FieldValue.arrayUnion(profileId),
+    });
+}
+
+export async function updateFollowedUserFollowers(
+  spDocId: string, //Suggested person docId
+  loggedInUserDocId: string, //My id (the one who follows)
+  isFollowingProfile: boolean
+) {
+  return firebase
+    .firestore()
+    .collection("users")
+    .doc(spDocId)
+    .update({
+      followers: isFollowingProfile
+        ? FieldValue.arrayRemove(loggedInUserDocId)
+        : FieldValue.arrayUnion(loggedInUserDocId),
+    });
+}
+// takes photos from the api
+export async function getPhotos(userId: string, following: string[]) {
+  const result = await firebase
+    .firestore()
+    .collection("photos")
+    .where("userId", "in", following)
+    .get();
+
+  const userFollowedPhotos = result.docs.map((photo: any) => ({
+    ...photo.data(),
+    docId: photo.id,
+  }));
+
+  const photosWithUserDetails = await Promise.all(
+    userFollowedPhotos.map(async (photo: any) => {
+      let userLikedPhoto = false;
+      if (photo.likes.includes(userId)) {
+        userLikedPhoto = true;
+      }
+      const user: any = await getUserByUserId(photo.userId);
+      const { username } = user[0];
+      return { ...photo, userLikedPhoto, username };
+    })
+  );
+
+  return photosWithUserDetails;
+}
+export async function updateCommentsArray(
+  loggedInUser: string,
+  commentValue: string,
+  photoId: string
+) {
+  return firebase
+    .firestore()
+    .collection("photos")
+    .doc(photoId)
+    .update({
+      comments: FieldValue.arrayUnion(commentValue),
+    });
 }

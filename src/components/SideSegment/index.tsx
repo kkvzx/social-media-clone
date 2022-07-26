@@ -9,11 +9,7 @@ import Skeleton from "react-loading-skeleton";
 
 const SideSegment = () => {
   const { user }: any = useUser();
-  // !(
-  //   user &&
-  //   Object.keys(user).length === 0 &&
-  //   Object.getPrototypeOf(user) === Object.prototype
-  // ) && console.log(user[0].following);
+
   return !(
     user &&
     Object.keys(user).length === 0 &&
@@ -21,7 +17,11 @@ const SideSegment = () => {
   ) ? (
     <SideSegmentWrapper>
       <User username={user[0].username} fullName={user[0].fullName} />
-      <Suggestions userId={user[0].userId} following={user[0].following} />
+      <Suggestions
+        LoggedInUserDocId={user[0].docId}
+        userId={user[0].userId}
+        following={user[0].following}
+      />
     </SideSegmentWrapper>
   ) : null;
 };

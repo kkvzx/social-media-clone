@@ -26,11 +26,7 @@ export const UserWrapper = styled.div`
   align-content: center;
   margin-bottom: 12px;
 `;
-export const UserWrapperSmall = styled(UserWrapper)`
-  grid-template-columns: 30px auto;
-  grid-gap: 0 16px;
-  margin-top: 12px;
-`;
+
 export const AvatarSide = styled(Avatar)`
   width: 50px;
   height: 50px;
@@ -39,10 +35,7 @@ export const AvatarSide = styled(Avatar)`
   border: none;
   cursor: pointer;
 `;
-export const AvatarSideSmall = styled(Avatar)`
-  grid-row-start: -1;
-  grid-row-end: 1;
-`;
+
 export const AuthorBig = styled(Author)`
   font-size: 14px;
 `;
@@ -53,7 +46,5 @@ export const LinkR = styled(Link)`
   text-decoration: none;
   align-self: end;
   font-size: 14px;
-  &:visited {
-  }
 `;
 export const SugestionsWrapper = styled.div``;

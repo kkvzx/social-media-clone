@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { getPhotos, updateCommentsArray } from "../../services/firebase";
 import { SingleIcon } from "../Header/HeaderElements";
 import {
   Author,
@@ -28,19 +29,41 @@ const likeIcon = require("../../img/Like.png");
 const commentIcon = require("../../img/Comment.png");
 const sendIcon = require("../../img/Send.png");
 const saveIcon = require("../../img/Save.png");
-
 const testPhoto = require("../../photoTest.jpg");
-const SinglePost = () => {
+
+const SinglePost = ({
+  content: {
+    photoId,
+    caption,
+    comments,
+    dataCreated,
+    docId,
+    imageSrc,
+    likes,
+    userId,
+    userLatitude,
+    userLikedPhoto,
+    userLongitude,
+    username,
+  },
+}: photoProps) => {
+  // const myDate = new Date(dataCreated * 1000);
+  const [commentValue, setCommentValue] = useState<string>("");
+  async function handlePost(e: any) {
+    e.preventDefault();
+    // Updating the comments array by the comment,looged User throught photoid
+    // await updateCommentsArray(loggedInUser, commentValue, photoId);
+  }
   return (
     <SinglePostWrapper>
       {/* HEAD */}
       <HeaderOfPost>
-        <Author>archdaily</Author>
+        <Author>{username}</Author>
         <Location>Amsterdam</Location>
       </HeaderOfPost>
       {/* PHOTO */}
       <PhotosContainer>
-        <Photo src={testPhoto} />
+        <Photo src={imageSrc} alt="?" />
       </PhotosContainer>
       {/* REACTION BAR */}
       <ReactionBar>
@@ -70,19 +93,24 @@ const SinglePost = () => {
         </SavedIcon>
       </ReactionBar>
       {/* DESCRIPTION AND LIKES */}
-      <Likes>13,184 likes</Likes>
+      <Likes>{likes.length} likes</Likes>
       <Description>
-        <Author>archdaiy</Author> Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Totam ipsa sit aliquid recusandae. Odio dignissimos
-        molestiae eos autem nesciunt quasi!
+        <Author>{username}</Author> {caption}
       </Description>
       <Comments>
-        <BtnIcon>View all 154 comments</BtnIcon>
-        <Date>2 days ago</Date>
+        {comments.length > 0 ? (
+          <BtnIcon>View all {comments.length} comments</BtnIcon>
+        ) : (
+          <BtnIcon>No comments yet</BtnIcon>
+        )}
+        <Date>Two days ago</Date>
       </Comments>
       <AddCommentSection>
-        <AddComment type="text"></AddComment>
-        <SubmitButton type="submit" onClick={(e) => e.preventDefault()}>
+        <AddComment
+          type="text"
+          onChange={(e: any) => setCommentValue(e.target.value)}
+        ></AddComment>
+        <SubmitButton type="submit" onClick={(e) => handlePost(e)}>
           Post
         </SubmitButton>
       </AddCommentSection>
@@ -91,3 +119,21 @@ const SinglePost = () => {
 };
 
 export default SinglePost;
+
+interface photoProps {
+  content: {
+    key: "string";
+    photoId: number;
+    caption: string;
+    comments: string[];
+    dataCreated: number;
+    docId: string;
+    imageSrc: string;
+    likes: string[];
+    userId: string;
+    userLatitude: string;
+    userLikedPhoto: boolean;
+    userLongitude: string;
+    username: string;
+  };
+}
