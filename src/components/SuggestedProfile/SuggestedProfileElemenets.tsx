@@ -9,6 +9,7 @@ export const UserWrapperSmall = styled(UserWrapper)`
 export const AvatarSideSmall = styled(Avatar)`
   grid-row-start: -1;
   grid-row-end: 1;
+  align-self: center;
 `;
 export const FollowBtn = styled.button`
   background: none;

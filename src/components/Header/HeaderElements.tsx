@@ -49,9 +49,10 @@ export const SingleIcon = styled.img`
   height: 21px;
 `;
 export const Avatar = styled(SingleIcon)`
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 100%;
+  cursor: pointer;
 `;
 export const LogBtn = styled.button`
   width: 90px;

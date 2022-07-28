@@ -8,26 +8,28 @@ export const SinglePostWrapper = styled.div`
   align-items: flex-start;
   border: 1px solid var(--shadows-color);
   border-radius: 8px;
-  margin: 8px 0;
+  margin: 8px 0 2rem;
   overflow: hidden;
 `;
 /* HEAD STARt */
 export const HeaderOfPost = styled.div`
   width: 100%;
-  height: 58px;
+  height: 50px;
   display: grid;
-  grid-template-columns: 42px auto;
-  grid-template-rows: 21px 21px;
-  align-content: center;
-  align-items: end;
+  grid-template-rows: 0.5fr 0.5fr;
+  grid-template-columns: 30px auto;
+  margin-left: 8px;
+  grid-gap: 0 16px;
 `;
 export const Author = styled.p`
   font-size: 14px;
+  margin-right: 4px;
   align-self: end;
   color: var(--font-color);
   font-weight: var(--bold-weight);
   grid-column-start: 2;
   grid-row-start: 1;
+  cursor: pointer;
 `;
 export const Location = styled.p`
   font-size: 12px;
@@ -67,6 +69,10 @@ export const BtnIcon = styled.button`
   border: none;
   background: none;
   cursor: pointer;
+  &.commentsText {
+    margin-left: 20px;
+    margin-bottom: 4px;
+  }
 `;
 export const Icon = styled.img`
   width: 21px;
@@ -98,14 +104,14 @@ export const SavedIconImg = styled.img`
 // DESCRIPTION START
 export const Likes = styled.div`
   width: 100%;
-  margin: 0 8px;
+  margin: 0px 8px 8px;
   padding: 0 12px;
   font-size: 12px;
   font-weight: var(--bold-weight);
 `;
 export const Description = styled.div`
   width: 100%;
-  margin: 8px;
+  margin: 4px 8px;
   padding: 0 12px;
   font-size: 12px;
   font-weight: var(--regular-weight);
@@ -116,8 +122,8 @@ export const Description = styled.div`
 `;
 export const Comments = styled.div`
   width: 100%;
-  margin: 0 8px 8px;
-  padding: 0 12px;
+  margin: 0 0px 8px;
+  padding: 0 0px;
 
   & > ${BtnIcon} {
     color: var(--comments-color);
@@ -126,17 +132,17 @@ export const Comments = styled.div`
     padding: 0;
   }
 `;
-export const Date = styled.p`
+export const FormatDate = styled.p`
   color: var(--comments-color);
   font-size: 10px;
-  font-weight: var(--bold-weight);
+  font-weight: var(--regular-weight);
   text-transform: Uppercase;
-  margin-top: 8px;
+  margin: 12px 20px;
 `;
 
 // DESCRIPTION END
 // ADD COMMENT SECTION START
-export const AddCommentSection = styled.form`
+export const AddCommentSectionWrapper = styled.form`
   width: 100%;
   height: 40px;
   border-top: 1px solid #e9e9e9;
@@ -145,6 +151,11 @@ export const AddComment = styled.input`
   border: none;
   width: Calc(100% - 80px);
   height: 40px;
+  padding: 20px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 export const SubmitButton = styled.button`
   width: 80px;
@@ -155,5 +166,8 @@ export const SubmitButton = styled.button`
   font-weight: var(--bold-weight);
   color: blue;
   cursor: pointer;
+  &:disabled {
+    opacity: 25%;
+  }
 `;
 // ADD COMMENT SECTION STOP

@@ -1,42 +1,27 @@
-import React, { useState } from "react";
-import { getPhotos, updateCommentsArray } from "../../services/firebase";
-import { SingleIcon } from "../Header/HeaderElements";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Actions from "./ActionsSection";
+import AddCommentSection from "./AddCommentSection";
+import CommentsSection from "./CommentsSection";
+import FooterSection from "./FooterSection";
+import HeaderOfPostSection from "./HeaderOfPostSection";
+import PhotoSection from "./PhotoSection";
 import {
   Author,
-  HeaderOfPost,
   SinglePostWrapper,
-  Location,
-  PhotosContainer,
-  Photo,
-  ReactionBar,
-  IconSegment,
-  NumberOfPhotos,
-  Icon,
-  Dot,
   BtnIcon,
-  SavedIcon,
-  SavedIconImg,
-  Likes,
   Description,
   Comments,
-  Date,
   AddComment,
   SubmitButton,
-  AddCommentSection,
 } from "./SinglePostElements";
-
-const likeIcon = require("../../img/Like.png");
-const commentIcon = require("../../img/Comment.png");
-const sendIcon = require("../../img/Send.png");
-const saveIcon = require("../../img/Save.png");
-const testPhoto = require("../../photoTest.jpg");
 
 const SinglePost = ({
   content: {
     photoId,
     caption,
     comments,
-    dataCreated,
+    dateCreated,
     docId,
     imageSrc,
     likes,
@@ -48,7 +33,12 @@ const SinglePost = ({
   },
 }: photoProps) => {
   // const myDate = new Date(dataCreated * 1000);
-  const [commentValue, setCommentValue] = useState<string>("");
+  const [commentValue, setCommentValue] = useState<string>();
+  const commentInput = useRef(null);
+  const handleFocus = () => (commentInput as any).current.focus();
+  const handleCommentValue = (text: string) => {
+    setCommentValue(text);
+  };
   async function handlePost(e: any) {
     e.preventDefault();
     // Updating the comments array by the comment,looged User throught photoid
@@ -57,63 +47,30 @@ const SinglePost = ({
   return (
     <SinglePostWrapper>
       {/* HEAD */}
-      <HeaderOfPost>
-        <Author>{username}</Author>
-        <Location>Amsterdam</Location>
-      </HeaderOfPost>
+      <HeaderOfPostSection username={username} />
       {/* PHOTO */}
-      <PhotosContainer>
-        <Photo src={imageSrc} alt="?" />
-      </PhotosContainer>
+      <PhotoSection imageSrc={imageSrc} />
       {/* REACTION BAR */}
-      <ReactionBar>
-        <IconSegment>
-          <BtnIcon>
-            <Icon src={likeIcon}></Icon>
-          </BtnIcon>
-          <BtnIcon>
-            <Icon src={commentIcon}></Icon>
-          </BtnIcon>
-          <BtnIcon>
-            <Icon src={sendIcon}></Icon>
-          </BtnIcon>
-        </IconSegment>
-        <NumberOfPhotos>
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-        </NumberOfPhotos>
-        <SavedIcon>
-          <BtnIcon>
-            <SavedIconImg src={saveIcon} />
-          </BtnIcon>
-        </SavedIcon>
-      </ReactionBar>
+      <Actions
+        docId={docId}
+        totalLikes={likes.length}
+        likedPhoto={userLikedPhoto}
+        handleFocus={handleFocus}
+      />
       {/* DESCRIPTION AND LIKES */}
-      <Likes>{likes.length} likes</Likes>
-      <Description>
-        <Author>{username}</Author> {caption}
-      </Description>
-      <Comments>
-        {comments.length > 0 ? (
-          <BtnIcon>View all {comments.length} comments</BtnIcon>
-        ) : (
-          <BtnIcon>No comments yet</BtnIcon>
-        )}
-        <Date>Two days ago</Date>
-      </Comments>
-      <AddCommentSection>
-        <AddComment
-          type="text"
-          onChange={(e: any) => setCommentValue(e.target.value)}
-        ></AddComment>
-        <SubmitButton type="submit" onClick={(e) => handlePost(e)}>
-          Post
-        </SubmitButton>
-      </AddCommentSection>
+      <FooterSection
+        username={username}
+        caption={caption}
+        comments={comments}
+        handlePost={handlePost}
+        handleCommentValue={handleCommentValue}
+      />
+      <CommentsSection
+        docId={docId}
+        comments={comments}
+        posted={dateCreated}
+        commentInput={commentInput}
+      />
     </SinglePostWrapper>
   );
 };
@@ -125,8 +82,8 @@ interface photoProps {
     key: "string";
     photoId: number;
     caption: string;
-    comments: string[];
-    dataCreated: number;
+    comments: { displayName: string; comment: string }[];
+    dateCreated: number;
     docId: string;
     imageSrc: string;
     likes: string[];
@@ -137,3 +94,6 @@ interface photoProps {
     username: string;
   };
 }
+
+// 40.7128;
+// 74.006;
