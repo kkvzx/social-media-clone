@@ -1,20 +1,10 @@
-import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
 import Actions from "./ActionsSection";
-import AddCommentSection from "./AddCommentSection";
 import CommentsSection from "./CommentsSection";
 import FooterSection from "./FooterSection";
 import HeaderOfPostSection from "./HeaderOfPostSection";
 import PhotoSection from "./PhotoSection";
-import {
-  Author,
-  SinglePostWrapper,
-  BtnIcon,
-  Description,
-  Comments,
-  AddComment,
-  SubmitButton,
-} from "./SinglePostElements";
+import { SinglePostWrapper } from "./SinglePostElements";
 
 const SinglePost = ({
   content: {

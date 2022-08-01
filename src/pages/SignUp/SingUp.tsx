@@ -1,10 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  LogoContainer,
-  LogoIcon,
-} from "../../components/Header/HeaderElements";
-import { SubmitButton } from "../../components/SinglePost/SinglePostElements";
+
 import FirebaseContext from "../../context/firebase";
 import * as ROUTES from "../../constants/routes";
 import {
@@ -82,6 +78,8 @@ const SignUp = () => {
 
   return (
     <LoginContainer>
+      <LoginImg src={loginPhoto} alt="login-photo" />
+
       <LoginWrapper>
         <LoginSegment>
           <LogoLogin src={logo} alt="logopng" />

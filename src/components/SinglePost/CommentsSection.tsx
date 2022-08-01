@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { formatDistance } from "date-fns";
-import { LinkR } from "../SideSegment/SideSegmentElements";
 import {
   Author,
   BtnIcon,
@@ -10,6 +9,7 @@ import {
 } from "./SinglePostElements";
 import { useNavigate } from "react-router-dom";
 import AddCommentSection from "./AddCommentSection";
+import { nanoid } from "nanoid";
 const CommentsSection = ({
   docId,
   comments: allComments,
@@ -18,7 +18,6 @@ const CommentsSection = ({
 }: CommentProps) => {
   const navigate = useNavigate();
   const [comments, setComments] = useState(allComments);
-
   return (
     <Comments>
       {comments.length >= 3 && (
@@ -26,8 +25,8 @@ const CommentsSection = ({
           View all {comments.length} comments
         </BtnIcon>
       )}
-      {comments.slice(0, 3).map((item) => (
-        <Description>
+      {comments.slice(comments.length - 3, comments.length).map((item) => (
+        <Description key={nanoid()}>
           <Author onClick={() => navigate(`/p/${item.displayName}`)}>
             {item.displayName}
           </Author>

@@ -11,6 +11,19 @@ export async function doesUsernameExist(username: string) {
   return result.docs.map((user) => user.data().length > 0);
 }
 
+export async function getUserByUsername(username: string | undefined) {
+  const result = await firebase
+    .firestore()
+    .collection("users")
+    .where("username", "==", username)
+    .get();
+
+  return result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+}
+
 // connecting Authentication and firebase by userId (UiD)
 
 // get user from the firestore where userId === userId (passed from the auth)
@@ -28,6 +41,7 @@ export async function getUserByUserId(userId: string) {
 
   return user;
 }
+
 // takes users data from the firebase
 export async function getSuggestedProfiles(
   userId: string,

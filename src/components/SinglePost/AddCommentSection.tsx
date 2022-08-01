@@ -20,10 +20,16 @@ const AddCommentSection = ({
 
   const handleSubmitComment = (event: any) => {
     event.preventDefault();
-    setComments([{ displayName, comment }, ...comments]);
+    setComments([...comments, { displayName, comment }]);
     setComment("");
 
-    return null;
+    return firebase
+      .firestore()
+      .collection("photos")
+      .doc(docId)
+      .update({
+        comments: FieldValue.arrayUnion({ displayName, comment }),
+      });
   };
   return (
     <AddCommentSectionWrapper

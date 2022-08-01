@@ -1,21 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Author,
-  BtnIcon,
-  Comments,
-  Description,
-  AddComment,
-  SubmitButton,
-} from "./SinglePostElements";
+import { Author, Description } from "./SinglePostElements";
 
-const FooterSection = ({
-  username,
-  caption,
-  comments,
-  handlePost,
-  handleCommentValue,
-}: FooterSectionProps) => {
+const FooterSection = ({ username, caption }: FooterSectionProps) => {
   const navigate = useNavigate();
 
   return (
