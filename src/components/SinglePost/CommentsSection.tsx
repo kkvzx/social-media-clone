@@ -10,6 +10,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import AddCommentSection from "./AddCommentSection";
 import { nanoid } from "nanoid";
+import PhotoPage from "../../pages/PhotoPage/photoPage";
+import * as ROUTES from "../../constants/routes";
 const CommentsSection = ({
   docId,
   comments: allComments,
@@ -18,10 +20,15 @@ const CommentsSection = ({
 }: CommentProps) => {
   const navigate = useNavigate();
   const [comments, setComments] = useState(allComments);
+  const handleViewAll = () => {
+    console.log("GOOOD MORNING VIEEETNAM");
+    console.log(docId);
+    navigate(`/photo/${docId}`);
+  };
   return (
     <Comments>
       {comments.length >= 3 && (
-        <BtnIcon className="commentsText">
+        <BtnIcon className="commentsText" onClick={handleViewAll}>
           View all {comments.length} comments
         </BtnIcon>
       )}

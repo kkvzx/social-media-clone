@@ -1,6 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useUser from "../../hooks/useUser";
-import { getUserByUsername } from "../../services/firebase";
+import {
+  getUserByUsername,
+  updateFollowedUserFollowers,
+  updateLoggedInUserFollowing,
+} from "../../services/firebase";
 import {
   HeaderOfProfileWrapper,
   MainAvatar,
@@ -18,11 +22,33 @@ const HeaderOfProfile = ({ visitedUserData }: any) => {
   const handleEdit = () => {
     console.log("edit");
   };
-  const handleFollow = () => {
-    console.log("follow");
-  };
   const { user }: any = useUser();
-  console.log(user);
+  const [followed, setFollowed] = useState<boolean>(false);
+  // is currently logged in user already following that user
+  useEffect(() => {
+    user[0] &&
+      visitedUserData[0] &&
+      setFollowed(user[0].following.includes(visitedUserData[0].userId));
+  }, []);
+
+  async function handleFollow() {
+    setFollowed((prev) => !prev);
+    // Updating the following array of the logged in user
+
+    await updateLoggedInUserFollowing(
+      user[0].docId,
+      visitedUserData[0].userId,
+      followed
+    );
+    // updating the followers array of the user who has been followed
+
+    await updateFollowedUserFollowers(
+      visitedUserData[0].docId,
+      user[0].userId,
+      followed
+    );
+  }
+  // console.log(user);
 
   return visitedUserData && user ? (
     <HeaderOfProfileWrapper>
@@ -41,8 +67,14 @@ const HeaderOfProfile = ({ visitedUserData }: any) => {
             <EditProfileButton onClick={handleEdit}>
               Edit profile
             </EditProfileButton>
+          ) : followed ? (
+            <EditProfileButton onClick={handleFollow} className="follow">
+              Unfollow
+            </EditProfileButton>
           ) : (
-            <EditProfileButton onClick={handleFollow}>Follow</EditProfileButton>
+            <EditProfileButton onClick={handleFollow} className="follow">
+              Follow
+            </EditProfileButton>
           )}
         </Row>
         <Row>
@@ -50,15 +82,12 @@ const HeaderOfProfile = ({ visitedUserData }: any) => {
           <Number>
             <Bold>7</Bold> posts
           </Number>
-          <Number>
-            <Bold>11</Bold> followers
-          </Number>
+
           <Number>
             <Bold>{visitedUserData[0].following.length}</Bold> following
           </Number>
         </Row>
 
-        <FullName></FullName>
         <ProfilDescription>
           <Bold>{visitedUserData[0].fullName}</Bold>
         </ProfilDescription>

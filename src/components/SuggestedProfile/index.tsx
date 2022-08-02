@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FirebaseContext from "../../context/firebase";
 import { LinkR } from "../SideSegment/SideSegmentElements";
 import { Author, Location } from "../SinglePost/SinglePostElements";
 import {
@@ -31,6 +30,7 @@ const SuggestedProfile = ({
     // updating the followers array of the user who has been followed
     await updateFollowedUserFollowers(spDocId, userId, false);
   }
+
   return !followed ? (
     <UserWrapperSmall key={spDocId}>
       <AvatarSideSmall

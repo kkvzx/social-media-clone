@@ -59,23 +59,7 @@ const ActionsSection = ({
           >
             <Icon src={`/img/Comment.png`}></Icon>
           </BtnIcon>
-          <BtnIcon>
-            <Icon src={`/img/Send.png`}></Icon>
-          </BtnIcon>
         </IconSegment>
-        <NumberOfPhotos>
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
-        </NumberOfPhotos>
-        <SavedIcon>
-          <BtnIcon>
-            <SavedIconImg src={`/img/Save.png`} />
-          </BtnIcon>
-        </SavedIcon>
       </ReactionBar>
       <Likes>{likes === 1 ? `${likes} like` : `${likes} likes`}</Likes>
     </>

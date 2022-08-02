@@ -53,7 +53,7 @@ const Header = () => {
                 onClick={() => navigate(ROUTES.DASHBOARD)}
               />
             </BtnIcon>
-            <BtnIcon>
+            {/* <BtnIcon>
               <SingleIcon src={sendIcon} />
             </BtnIcon>
             <BtnIcon>
@@ -61,11 +61,11 @@ const Header = () => {
             </BtnIcon>
             <BtnIcon>
               <SingleIcon src={likeIcon} />
-            </BtnIcon>
+            </BtnIcon> */}
             <BtnIcon onClick={handleSignOut}>
               <SingleIcon src={signOut} />
             </BtnIcon>
-            <BtnIcon onClick={() => navigate(ROUTES.PROFILE)}>
+            <BtnIcon onClick={() => navigate(`/p/${user.displayName}`)}>
               <Avatar
                 src={`/img/avatars/${user.displayName}.jpg`}
                 alt="profile picture"

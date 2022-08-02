@@ -15,6 +15,7 @@ const SingUp = lazy(() => import("../../pages/SignUp/SingUp"));
 const Dashboard = lazy(() => import("../../pages/Dashboard/Dashboard"));
 const Profile = lazy(() => import("../../pages/Profile/Profile"));
 const NotFound = lazy(() => import("../../pages/NotFound/notFound"));
+const PhotoPage = lazy(() => import("../../pages/PhotoPage/photoPage"));
 
 const Main = () => {
   const { user } = useAuthListener();
@@ -37,6 +38,7 @@ const Main = () => {
             />
             <Route path={ROUTES.PROFILE} element={<Profile />} />
             <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+            <Route path={ROUTES.PHOTO_PAGE} element={<PhotoPage />} />
           </Routes>
         </Suspense>
       </Router>

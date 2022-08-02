@@ -4,9 +4,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getUserByUsername } from "../../services/firebase";
 import * as ROUTES from "../../constants/routes";
 import Header from "../../components/Header";
-import { MiddleSegment } from "../Dashboard/DashboardElements";
 import HeaderOfProfile from "../../components/HeaderOfProfile";
 import useUser from "../../hooks/useUser";
+import PhotoGallery from "../../components/ProfileGallery";
+import { MiddleProfileSegment } from "./ProfileElements";
 
 const Profile = () => {
   const { username } = useParams();
@@ -26,14 +27,15 @@ const Profile = () => {
       }
     }
     checkUserExists();
-  }, []);
+  }, [username]);
 
   return (
     <>
       <Header />
-      <MiddleSegment>
+      <MiddleProfileSegment>
         <HeaderOfProfile visitedUserData={visitedUserExist} />
-      </MiddleSegment>
+        <PhotoGallery visitedUserData={visitedUserExist} />
+      </MiddleProfileSegment>
     </>
   );
 };

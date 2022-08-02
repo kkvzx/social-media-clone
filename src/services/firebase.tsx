@@ -23,6 +23,17 @@ export async function getUserByUsername(username: string | undefined) {
     docId: item.id,
   }));
 }
+export async function getPhotosByUserId(userId: string | undefined) {
+  const result = await firebase
+    .firestore()
+    .collection("photos")
+    .where("userId", "==", userId)
+    .get();
+  return result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+}
 
 // connecting Authentication and firebase by userId (UiD)
 
@@ -56,7 +67,6 @@ export async function getSuggestedProfiles(
         profile.userId !== userId && !following.includes(profile.userId)
     );
 }
-
 export async function updateLoggedInUserFollowing(
   loggedInUserDocId: string, //currently logged in user document id
   profileId: string, //the user that I'm requesting to follow
@@ -88,7 +98,7 @@ export async function updateFollowedUserFollowers(
         : FieldValue.arrayUnion(loggedInUserDocId),
     });
 }
-// takes photos from the api
+// takes photos from firebase
 export async function getPhotos(userId: string, following: string[]) {
   const result = await firebase
     .firestore()
@@ -115,6 +125,7 @@ export async function getPhotos(userId: string, following: string[]) {
 
   return photosWithUserDetails;
 }
+
 export async function updateCommentsArray(
   loggedInUser: string,
   commentValue: string,
