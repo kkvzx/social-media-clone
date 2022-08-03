@@ -2,12 +2,9 @@ import styled from "styled-components";
 
 export const PhotoGalleryWrapper = styled.div`
   max-width: 975px;
-  justify-content: center;
-  align-items: center;
-
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(32%, 300px));
-  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(32%, 293px));
+  grid-gap: 18px;
 `;
 export const AllPhotos = styled.div`
   /* position: absolute;
@@ -22,7 +19,14 @@ export const AllPhotos = styled.div`
 
 export const SinglePhoto = styled.img`
   width: 100%;
-  height: 300px;
+  height: 293px;
   object-fit: cover;
   object-position: center;
+  cursor: pointer;
+`;
+export const NothingThere = styled.div`
+  width: 100%;
+  text-align: center;
+  grid-column-start: 0;
+  grid-column-end: 3;
 `;

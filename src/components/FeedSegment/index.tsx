@@ -3,11 +3,11 @@ import { FeedSegmentWrapper } from "./FeedSegmentElements";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 import usePhotos from "../../hooks/usePhotos";
+import { NothingThere } from "../ProfileGallery/PhotoGalleryElements";
 
 const FeedSegment = () => {
   // logged in user's photos
   const { photos }: any = usePhotos();
-
   return (
     <FeedSegmentWrapper>
       {!(
@@ -20,9 +20,11 @@ const FeedSegment = () => {
             <SinglePost key={content.docId} content={content}></SinglePost>
           ))
         ) : (
-          <p>Follow people to see photos</p>
+          <NothingThere>Follow more people to see photos</NothingThere>
         )
-      ) : null}
+      ) : (
+        <NothingThere>Follow more people to see photos</NothingThere>
+      )}
     </FeedSegmentWrapper>
   );
 };

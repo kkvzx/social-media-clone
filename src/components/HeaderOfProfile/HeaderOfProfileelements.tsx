@@ -23,6 +23,7 @@ export const Content = styled.div`
 `;
 export const Bold = styled.span`
   font-weight: var(--bold-weight);
+  text-align: center;
 `;
 export const Username = styled.p`
   font-size: 1.6rem;

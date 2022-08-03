@@ -14,6 +14,7 @@ import PhotoPage from "../../pages/PhotoPage/photoPage";
 import * as ROUTES from "../../constants/routes";
 const CommentsSection = ({
   docId,
+  photoId,
   comments: allComments,
   posted,
   commentInput,
@@ -21,9 +22,7 @@ const CommentsSection = ({
   const navigate = useNavigate();
   const [comments, setComments] = useState(allComments);
   const handleViewAll = () => {
-    console.log("GOOOD MORNING VIEEETNAM");
-    console.log(docId);
-    navigate(`/photo/${docId}`);
+    navigate(`/photo/${photoId}`);
   };
   return (
     <Comments>
@@ -55,6 +54,7 @@ export default CommentsSection;
 
 interface CommentProps {
   docId: string;
+  photoId: string;
   comments: { displayName: string; comment: string }[];
   posted: number;
   commentInput: React.MutableRefObject<any>;

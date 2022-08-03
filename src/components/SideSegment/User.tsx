@@ -24,6 +24,10 @@ const User = ({ username, fullName }: propTypes) => {
         src={`/img/avatars/${username}.jpg`}
         alt="avatar"
         onClick={() => navigate(`/p/${username}`)}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src = "/img/avatars/default.png";
+        }}
       />
       <LinkR to={`/p/${username}`}>
         <AuthorBig>{username}</AuthorBig>

@@ -39,7 +39,7 @@ export const NavigationContainer = styled.div`
   padding-left: 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 `;
 export const NavigationContainerLog = styled(NavigationContainer)`
   justify-content: center;

@@ -31,7 +31,6 @@ const Header = () => {
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-
   const handleSignOut = () => {
     firebase.auth().signOut();
     navigate(ROUTES.LOGIN);
@@ -44,7 +43,6 @@ const Header = () => {
             <LogoIcon src={logo} />
           </LogoBtn>
         </LogoContainer>
-        <Searchbar type="search" />
         {user ? (
           <NavigationContainer>
             <BtnIcon>
@@ -53,22 +51,20 @@ const Header = () => {
                 onClick={() => navigate(ROUTES.DASHBOARD)}
               />
             </BtnIcon>
-            {/* <BtnIcon>
-              <SingleIcon src={sendIcon} />
-            </BtnIcon>
-            <BtnIcon>
-              <SingleIcon src={addPostIcon} />
-            </BtnIcon>
-            <BtnIcon>
-              <SingleIcon src={likeIcon} />
-            </BtnIcon> */}
+
             <BtnIcon onClick={handleSignOut}>
               <SingleIcon src={signOut} />
             </BtnIcon>
-            <BtnIcon onClick={() => navigate(`/p/${user.displayName}`)}>
+            <BtnIcon
+              onClick={() => navigate(`/p/${user.displayName.toLowerCase()}`)}
+            >
               <Avatar
                 src={`/img/avatars/${user.displayName}.jpg`}
                 alt="profile picture"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src = "/img/avatars/default.png";
+                }}
               />
             </BtnIcon>
           </NavigationContainer>

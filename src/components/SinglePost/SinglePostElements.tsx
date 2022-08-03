@@ -30,6 +30,11 @@ export const Author = styled.p`
   grid-column-start: 2;
   grid-row-start: 1;
   cursor: pointer;
+  &.photoView {
+    display: inline;
+    margin-right: 8px;
+    font-size: 12px;
+  }
 `;
 export const Location = styled.p`
   font-size: 12px;
@@ -68,6 +73,7 @@ export const BtnIcon = styled.button`
   padding: 8px;
   border: none;
   background: none;
+
   cursor: pointer;
   &.commentsText {
     margin-left: 20px;
@@ -114,7 +120,9 @@ export const Description = styled.div`
   margin: 4px 8px;
   padding: 0 12px;
   font-size: 12px;
+  color: black;
   font-weight: var(--regular-weight);
+
   & > ${Author} {
     font-size: 12px;
     display: inline;
@@ -124,6 +132,7 @@ export const Comments = styled.div`
   width: 100%;
   margin: 0 0px 8px;
   padding: 0 0px;
+  height: 100%;
 
   & > ${BtnIcon} {
     color: var(--comments-color);

@@ -57,6 +57,7 @@ const SinglePost = ({
       />
       <CommentsSection
         docId={docId}
+        photoId={photoId}
         comments={comments}
         posted={dateCreated}
         commentInput={commentInput}
@@ -70,7 +71,7 @@ export default SinglePost;
 interface photoProps {
   content: {
     key: "string";
-    photoId: number;
+    photoId: string;
     caption: string;
     comments: { displayName: string; comment: string }[];
     dateCreated: number;

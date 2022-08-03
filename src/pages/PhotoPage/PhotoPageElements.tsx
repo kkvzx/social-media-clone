@@ -7,5 +7,22 @@ export const PhotoPageContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: navy;
+`;
+export const PhotoPageWrapper = styled.div`
+  width: 935px;
+  height: 521px;
+  background: white;
+  display: flex;
+`;
+export const PhotoPagePhoto = styled.img`
+  width: 598px;
+  height: 521px;
+  object-fit: cover;
+  object-position: center;
+`;
+export const PhotoPageCommentsContainer = styled.div`
+  width: 100%;
+  height: 521px;
+  display: flex;
+  flex-direction: row;
 `;

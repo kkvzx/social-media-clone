@@ -34,6 +34,18 @@ export async function getPhotosByUserId(userId: string | undefined) {
     docId: item.id,
   }));
 }
+export async function getPhotoByPhotoId(photoId: string | undefined) {
+  const result = await firebase
+    .firestore()
+    .collection("photos")
+    .where("photoId", "==", photoId)
+    .get();
+
+  return result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+}
 
 // connecting Authentication and firebase by userId (UiD)
 
