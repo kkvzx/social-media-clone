@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import Actions from "./ActionsSection";
+import ActionsSection from "./ActionsSection";
 import CommentsSection from "./CommentsSection";
 import FooterSection from "./FooterSection";
 import HeaderOfPostSection from "./HeaderOfPostSection";
@@ -41,7 +41,7 @@ const SinglePost = ({
       {/* PHOTO */}
       <PhotoSection imageSrc={imageSrc} />
       {/* REACTION BAR */}
-      <Actions
+      <ActionsSection
         docId={docId}
         totalLikes={likes.length}
         likedPhoto={userLikedPhoto}
@@ -68,7 +68,7 @@ const SinglePost = ({
 
 export default SinglePost;
 
-interface photoProps {
+export interface photoProps {
   content: {
     key: "string";
     photoId: string;

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import PhotoPageComments from "../../components/PhotoPageComments/photoPageComments";
+import UserContext from "../../context/user";
 import { getPhotoByPhotoId } from "../../services/firebase";
 import {
   PhotoPageContent,
@@ -17,6 +18,7 @@ const PhotoPage = () => {
     async function gettingPhoto() {
       const receivedPhoto = await getPhotoByPhotoId(photoId);
       setPhoto(receivedPhoto);
+
       return photo;
     }
     gettingPhoto();
@@ -27,7 +29,7 @@ const PhotoPage = () => {
       <PhotoPageContent>
         <PhotoPageWrapper>
           <PhotoPagePhoto src={photo[0].imageSrc} alt="photo.jpg" />
-          <PhotoPageComments photo={photo[0]} />
+          <PhotoPageComments content={photo[0]} />
         </PhotoPageWrapper>
       </PhotoPageContent>
     </>

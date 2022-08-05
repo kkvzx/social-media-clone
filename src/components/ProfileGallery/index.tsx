@@ -14,6 +14,7 @@ import {
 
 const PhotoGallery = ({ visitedUserData }: any) => {
   const [photos, setPhotos] = useState<any>();
+
   const navigate = useNavigate();
   useEffect(() => {
     async function getData() {

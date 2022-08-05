@@ -5,25 +5,31 @@ import { getUserByUserId } from "../../services/firebase";
 import useUser from "../../hooks/useUser";
 import Suggestions from "./Suggestions";
 import User from "./User";
-import Skeleton from "react-loading-skeleton";
+import { Facebook } from "react-content-loader";
 
 const SideSegment = () => {
   const { user }: any = useUser();
 
-  return !(
-    user &&
-    Object.keys(user).length === 0 &&
-    Object.getPrototypeOf(user) === Object.prototype
-  ) ? (
+  return (
     <SideSegmentWrapper>
-      <User username={user[0].username} fullName={user[0].fullName} />
-      <Suggestions
-        LoggedInUserDocId={user[0].docId}
-        userId={user[0].userId}
-        following={user[0].following}
-      />
+      {!(
+        user &&
+        Object.keys(user).length === 0 &&
+        Object.getPrototypeOf(user) === Object.prototype
+      ) ? (
+        <>
+          <User username={user[0].username} fullName={user[0].fullName} />
+          <Suggestions
+            LoggedInUserDocId={user[0].docId}
+            userId={user[0].userId}
+            following={user[0].following}
+          />
+        </>
+      ) : (
+        [...Array(4)].map((item) => <Facebook key={item} />)
+      )}
     </SideSegmentWrapper>
-  ) : null;
+  );
 };
 
 export default SideSegment;

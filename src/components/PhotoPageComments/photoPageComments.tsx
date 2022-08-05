@@ -1,12 +1,13 @@
 import { formatDistance } from "date-fns";
 import { nanoid } from "nanoid";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserByUserId } from "../../services/firebase";
 import { Bold } from "../HeaderOfProfile/HeaderOfProfileelements";
 import { LinkR } from "../SideSegment/SideSegmentElements";
 import AddCommentSection from "../SinglePost/AddCommentSection";
 import HeaderOfPostSection from "../SinglePost/HeaderOfPostSection";
+import ActionsSection from "../SinglePost/ActionsSection";
 import {
   Author,
   Comments,
@@ -23,22 +24,33 @@ import {
   TextContainer,
   CommentContainer,
 } from "./PhotoPageCommentsElements";
+import UserContext from "../../context/user";
+import { photoProps } from "../SinglePost";
 
-const PhotoPageComments = ({ photo }: any) => {
+const PhotoPageComments = ({ content }: photoProps) => {
   const navigate = useNavigate();
+  const {
+    user: { uid: userId = "" }, //Default empty string
+  } = useContext(UserContext);
   const [authorData, setAuthorData] = useState<any>();
-  const [comments, setComments] = useState(photo.comments);
+  const [comments, setComments] = useState(content.comments);
+  const [userLikedPhoto, setUserLikedPhoto] = useState<boolean>(
+    content.likes.includes(userId)
+  );
+  const handleFocus = () => (commentInput as any).current.focus();
   const commentInput = useRef(null);
 
   useEffect(() => {
     async function userDetails() {
-      const user: any = await getUserByUserId(photo.userId);
+      const user: any = await getUserByUserId(content.userId);
       const { username } = user[0];
       setAuthorData(username);
     }
+    content && setUserLikedPhoto(content.likes.includes(userId));
+
     userDetails();
-  }, [photo]);
-  authorData && console.log(photo);
+  }, [content]);
+
   return (
     <PhotoPageCommentsContainer>
       <HeaderOfPostSection username={authorData} />
@@ -61,13 +73,13 @@ const PhotoPageComments = ({ photo }: any) => {
               >
                 {authorData}
               </Author>
-              {photo.caption}
+              {content.caption}
             </TextContainer>
           </CommentContainer>
 
           {comments.length > 0 ? (
             comments.map((item: any) => (
-              <CommentContainer>
+              <CommentContainer key={nanoid()}>
                 <AvatarSideSmall
                   src={`/img/avatars/${item.displayName}.jpg`}
                   alt="avatar"
@@ -99,10 +111,15 @@ const PhotoPageComments = ({ photo }: any) => {
           </FormatDate> */}
         </Comments>
       </PhotoPageCommentsSection>
-      <PhotoPageActions></PhotoPageActions>
+      <ActionsSection
+        docId={content.docId}
+        totalLikes={content.likes.length}
+        likedPhoto={userLikedPhoto}
+        handleFocus={handleFocus}
+      />
       <AddCommentSection
-        docId={photo.docId}
-        comments={photo.comments}
+        docId={content.docId}
+        comments={content.comments}
         setComments={setComments}
         commentInput={commentInput}
       />

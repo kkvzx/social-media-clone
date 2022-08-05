@@ -28,7 +28,6 @@ const ActionsSection = ({
 
   const handleToggleLiked = async () => {
     setToggleLiked((prev: any) => !prev);
-
     await firebase
       .firestore()
       .collection("photos")

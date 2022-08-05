@@ -29,6 +29,7 @@ export async function getPhotosByUserId(userId: string | undefined) {
     .collection("photos")
     .where("userId", "==", userId)
     .get();
+
   return result.docs.map((item) => ({
     ...item.data(),
     docId: item.id,
@@ -45,6 +46,19 @@ export async function getPhotoByPhotoId(photoId: string | undefined) {
     ...item.data(),
     docId: item.id,
   }));
+}
+
+export async function editDecriptionByDocId(
+  docId: string,
+  description: string | undefined
+) {
+  const result = await firebase
+    .firestore()
+    .collection("users")
+    .doc(docId)
+    .update({
+      description: description,
+    });
 }
 
 // connecting Authentication and firebase by userId (UiD)

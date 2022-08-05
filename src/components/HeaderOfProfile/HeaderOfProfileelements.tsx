@@ -52,3 +52,12 @@ export const Number = styled.p`
 `;
 export const FullName = styled.p``;
 export const ProfilDescription = styled.p``;
+export const EditForm = styled.form``;
+export const EditInput = styled.textarea`
+  width: 100%;
+  height: 50px;
+  resize: none;
+  line-height: 12px;
+  padding: 8px;
+  overflow: hidden;
+`;

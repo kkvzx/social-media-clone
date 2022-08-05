@@ -114,6 +114,7 @@ export const Likes = styled.div`
   padding: 0 12px;
   font-size: 12px;
   font-weight: var(--bold-weight);
+  color: black;
 `;
 export const Description = styled.div`
   width: 100%;

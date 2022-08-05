@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import useUser from "../../hooks/useUser";
+import ContentLoader, { Facebook } from "react-content-loader";
 import {
+  editDecriptionByDocId,
+  getPhotosByUserId,
   getUserByUsername,
   updateFollowedUserFollowers,
   updateLoggedInUserFollowing,
@@ -16,20 +19,31 @@ import {
   Row,
   Content,
   Bold,
+  EditForm,
+  EditInput,
 } from "./HeaderOfProfileelements";
 
 const HeaderOfProfile = ({ visitedUserData }: any) => {
-  const handleEdit = () => {
-    console.log("edit");
+  const [edit, setEdit] = useState<boolean>(false);
+  const [numberOfPosts, setNumberOfPosts] = useState<number>(0);
+  const [newDescription, setNewDescription] = useState<string>();
+  const [followed, setFollowed] = useState<boolean>(false);
+
+  const handleEdit = async () => {
+    if (edit) {
+      editDecriptionByDocId(visitedUserData[0].docId, newDescription);
+    }
+    setEdit((prev) => !prev);
+  };
+  const DescriptionSaver = (e: any) => {
+    setNewDescription(e.target.value);
   };
   const { user }: any = useUser();
-  const [followed, setFollowed] = useState<boolean>(false);
   // is currently logged in user already following that user
   useEffect(() => {
     user[0] &&
-      visitedUserData[0] &&
       setFollowed(user[0].following.includes(visitedUserData[0].userId));
-  }, []);
+  }, [visitedUserData]);
 
   async function handleFollow() {
     setFollowed((prev) => !prev);
@@ -48,7 +62,6 @@ const HeaderOfProfile = ({ visitedUserData }: any) => {
       followed
     );
   }
-  // console.log(user);
 
   return visitedUserData && user ? (
     <HeaderOfProfileWrapper>
@@ -64,11 +77,17 @@ const HeaderOfProfile = ({ visitedUserData }: any) => {
         <Row>
           <Username>{visitedUserData[0].username}</Username>
           {user[0].username === visitedUserData[0].username ? (
-            <EditProfileButton onClick={handleEdit}>
-              Edit profile
-            </EditProfileButton>
+            edit ? (
+              <EditProfileButton onClick={handleEdit} className="follow">
+                Save
+              </EditProfileButton>
+            ) : (
+              <EditProfileButton onClick={handleEdit}>
+                Edit Profile
+              </EditProfileButton>
+            )
           ) : followed ? (
-            <EditProfileButton onClick={handleFollow} className="follow">
+            <EditProfileButton onClick={handleFollow}>
               Unfollow
             </EditProfileButton>
           ) : (
@@ -78,11 +97,9 @@ const HeaderOfProfile = ({ visitedUserData }: any) => {
           )}
         </Row>
         <Row>
-          {/* te dane wezme z photos */}
           <Number>
-            <Bold>7</Bold> posts
+            <Bold>{visitedUserData[0].followers.length}</Bold> followers
           </Number>
-
           <Number>
             <Bold>{visitedUserData[0].following.length}</Bold> following
           </Number>
@@ -91,10 +108,29 @@ const HeaderOfProfile = ({ visitedUserData }: any) => {
         <ProfilDescription>
           <Bold>{visitedUserData[0].fullName}</Bold>
         </ProfilDescription>
-        <ProfilDescription>{visitedUserData[0].description}</ProfilDescription>
+        {!edit ? (
+          <ProfilDescription>
+            {newDescription ? newDescription : visitedUserData[0].description}
+          </ProfilDescription>
+        ) : (
+          <EditForm>
+            <EditInput onChange={(e) => DescriptionSaver(e)}></EditInput>
+          </EditForm>
+        )}
       </Content>
     </HeaderOfProfileWrapper>
-  ) : null;
+  ) : (
+    <HeaderOfProfileWrapper>
+      <ContentLoader height={150} width={2000} speed={1}>
+        <rect x="0" y="0" rx="100" ry="100" width="150" height="150" />
+        <rect x="250" y="20" rx="4" ry="4" width="300" height="20" />
+        <rect x="250" y="60" rx="3" ry="3" width="250" height="10" />
+        <rect x="250" y="80" rx="3" ry="3" width="250" height="10" />
+
+        <rect x="250" y="100" rx="3" ry="3" width="250" height="10" />
+      </ContentLoader>
+    </HeaderOfProfileWrapper>
+  );
 };
 
 export default HeaderOfProfile;

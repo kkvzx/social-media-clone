@@ -54,6 +54,7 @@ const SignUp = () => {
         // firebase user collection (create a document)
         await firebase.firestore().collection("users").add({
           userId: createdUserResult.user.uid,
+          description: "",
           username: username.toLowerCase(),
           fullName,
           emailAddress: emailAddress.toLowerCase(),
