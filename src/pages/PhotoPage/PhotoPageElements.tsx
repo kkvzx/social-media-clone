@@ -20,9 +20,3 @@ export const PhotoPagePhoto = styled.img`
   object-fit: cover;
   object-position: center;
 `;
-export const PhotoPageCommentsContainer = styled.div`
-  width: 100%;
-  height: 521px;
-  display: flex;
-  flex-direction: row;
-`;

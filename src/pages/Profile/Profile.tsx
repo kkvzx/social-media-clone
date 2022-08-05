@@ -14,6 +14,7 @@ const Profile = () => {
   const [userExist, setUserExist] = useState<boolean>();
   const [visitedUserExist, setVisitedUserExist] = useState<any>();
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     async function checkUserExists() {
