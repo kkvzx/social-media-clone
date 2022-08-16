@@ -24,7 +24,7 @@ const FeedSegment = () => {
           <NothingThere>Follow more people to see photos</NothingThere>
         )
       ) : (
-        [...Array(2)].map((item) => <Instagram key={nanoid()} />)
+        <NothingThere>Follow more people to see photos</NothingThere>
       )}
     </FeedSegmentWrapper>
   );

@@ -59,6 +59,7 @@ const SignUp = () => {
           fullName,
           emailAddress: emailAddress.toLowerCase(),
           following: [],
+          followers: [],
           dataCreated: Date.now(),
         });
         navigate(ROUTES.DASHBOARD);
